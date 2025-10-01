@@ -1,5 +1,10 @@
+import { Banner } from "./styles";
+import Logo from "../../assets/Logo.svg"
+
 export function Header () {
     return (
-        <div></div>
+        <Banner>
+            <img src={Logo} />
+        </Banner>
     )
 }
