@@ -11,6 +11,7 @@ export const ContainerForm = styled.form`
     margin-top: 200px;
     max-width: 54rem;
     width: 100%;
+    margin-bottom: 3rem;
 
 
     div{
@@ -36,4 +37,18 @@ export const ContainerForm = styled.form`
         padding: 1rem;
         border-radius: 8px;
     }
+`
+
+export const ContainerConteudo = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+
+    max-width: 54rem;
+    width: 100%;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 14.6rem;
 `

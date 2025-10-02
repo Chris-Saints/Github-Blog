@@ -1,7 +1,7 @@
 import { Conteudo } from "../../components/Conteudo";
 import { Header } from "../../components/Header";
 import { Perfil } from "../../components/Perfil";
-import { ContainerForm, ContainerMain } from "./styles";
+import { ContainerConteudo, ContainerForm, ContainerMain } from "./styles";
 
 export function Profile() {
     return (
@@ -17,7 +17,13 @@ export function Profile() {
                 <input type="text" placeholder="Buscar conteúdo " />
             </ContainerForm>
 
-            <Conteudo />
+            <ContainerConteudo>
+                <Conteudo />
+                <Conteudo />
+                <Conteudo />
+                <Conteudo />
+            </ContainerConteudo>
+
         </ContainerMain>
     )
 }
