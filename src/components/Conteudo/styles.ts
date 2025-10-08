@@ -12,6 +12,7 @@ export const ContainerConteudo = styled.button`
     border-radius: 10px;
     height: 16.25rem;
     width: 26rem;
+    transition: transform 0.2s;
 
 
     background: ${props => props.theme['base-post']};
@@ -20,6 +21,10 @@ export const ContainerConteudo = styled.button`
         text-align: start;
         color: ${props => props.theme['base-text']};
         line-height: 1.7;
+    }
+
+    &:hover {
+        transform: scale(1.1);
     }
 `
 
