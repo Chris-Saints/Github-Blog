@@ -3,38 +3,70 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faBuilding } from "@fortawesome/free-solid-svg-icons";
 import { faUserGroup } from "@fortawesome/free-solid-svg-icons/faUserGroup";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
-import Assustador  from "../../assets/assustador.jpeg"
 import { ContainerPerfil, ContainerPerfilInfo, PerfilInfo, PerfilNameLink } from "./styles";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+
+
+interface ProfileData {
+    name: string
+    bio: string
+    login: string
+    company: string
+    followers: number
+    avatar_url: string
+}
+
 
 export function Perfil() {
+
+    const [profile, setProfile] = useState<ProfileData | null>(null)
+
+    useEffect(() => {
+        async function fetchProfile() {
+            const response = await axios.get("https://api.github.com/users/Chris-Saints")
+            setProfile(response.data)
+        }
+
+        fetchProfile()
+    }, [])
+
+    if (!profile) {
+        return <p>Carregando perfil...</p>
+    }
+
+
+
+
     return (
         <ContainerPerfil>
             
-            <img src={Assustador}/>
+            <img src={profile.avatar_url} alt="Foto de Perfil"/>
 
             <ContainerPerfilInfo>
                 <PerfilNameLink>
-                    <h1>Christian Picoli</h1>
+                    <h1>{profile.name}</h1>
 
-                    <a>GITHUB <FontAwesomeIcon icon={faArrowUpRightFromSquare} style={{color: "#3294F8"}}/></a>
+                    <a href="https://github.com/Chris-Saints">GITHUB <FontAwesomeIcon icon={faArrowUpRightFromSquare} style={{color: "#3294F8"}}/></a>
                 </PerfilNameLink>
 
-                <p>Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat pulvinar vel mass.</p>
+                <p>{profile.bio}</p>
             
                 <PerfilInfo>
                     <span>
                         <FontAwesomeIcon icon={faGithub} style={{color: "#3A536B", height: '18px'}}/>
-                        Chris-Saint
+                        {profile.login}
                     </span>
 
                     <span>
                         <FontAwesomeIcon icon={faBuilding} style={{color: "#3A536B", height: '18px'}}/>
-                        Rocketseat
+                        {profile.company}
                     </span>
 
                     <span>
                         <FontAwesomeIcon icon={faUserGroup} style={{color: "#3A536B", height: '18px'}}/>
-                        10 seguidores
+                        {profile.followers} seguidores
                     </span>
                 </PerfilInfo>
             </ContainerPerfilInfo>
