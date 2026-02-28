@@ -4,7 +4,6 @@ import { faBuilding } from "@fortawesome/free-solid-svg-icons";
 import { faUserGroup } from "@fortawesome/free-solid-svg-icons/faUserGroup";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { ContainerPerfil, ContainerPerfilInfo, PerfilInfo, PerfilNameLink } from "./styles";
-import { useEffect} from "react";
 import type { GitHubUserProfile } from "../../utils/utils";
 
 
@@ -17,22 +16,6 @@ interface PerfilProps {
 
 
 export function Perfil({profile}: PerfilProps) {
-
-    
-    
-
-    useEffect(() => {
-        async function fetchProfile() {
-            
-
-        }
-
-        fetchProfile()
-    }, [])
-
-    if (!profile) {
-        return <p>Carregando perfil...</p>
-    }
 
     return (
         <ContainerPerfil>

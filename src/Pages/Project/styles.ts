@@ -16,8 +16,8 @@ export const ContainerTitulo = styled.section`
     max-width: 54rem;
     width: 100%;
     padding: 2rem 2rem 2rem 2.5rem;
-            position: absolute;
-        top: 200px;
+    position: absolute;
+    top: 200px;
 
 
     border-radius: 10px;
@@ -46,6 +46,7 @@ export const NavProjectContainer = styled.div`
         display: flex;
         align-items: center;
         border-bottom: 2px solid transparent;
+        transition: 0.2s;
     }
 
 
@@ -55,6 +56,7 @@ export const NavProjectContainer = styled.div`
         font-size: 12px;
         font-weight: bold;
         border-bottom: 2px solid transparent;
+        transition: 0.2s;
     }
 
     && a:hover{

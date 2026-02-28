@@ -56,6 +56,7 @@ export const PerfilNameLink = styled.div`
 
         color: ${props => props.theme['brand-blue']};
         font-weight: bold;
+        transition: 0.2s;
 
         cursor: pointer;
 

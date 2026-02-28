@@ -6,15 +6,18 @@ import { ContainerConteudo, ContainerForm, ContainerMain } from "./styles";
 import { useEffect, useState } from "react";
 import type { GitHubIssue, GitHubUserProfile } from "../../utils/utils";
 import { fetchIssues, searchIssues } from "../../services/api";
+import { Loading } from "../../components/Loading";
 
 export function Profile() {
 
     const [issues, setIssues] = useState<GitHubIssue[]>([])
     const [profile, setProfile] = useState<GitHubUserProfile | null>(null)
     const [query, setQuery] = useState<string>('')
+    const [loading, setLoading] = useState<boolean>(false)
 
     useEffect(() => {
         async function fetchProfile() {
+            setLoading(true)
             const user = "Chris-Saints"
             const response = await axios.get(`https://api.github.com/users/${user}`)
             setProfile(response.data)
@@ -22,6 +25,7 @@ export function Profile() {
             const freshIssues = await fetchIssues(user,"Github-Blog");
 
             setIssues(freshIssues)
+            setLoading(false)
         }
 
         fetchProfile()
@@ -59,13 +63,14 @@ export function Profile() {
         setQuery(e.target.value)
     }
 
-    if(!profile) {
-        return <div>Carregando...</div>
-    }
-
     return (
         <ContainerMain>
             <Header />
+
+            {loading && <Loading />}
+
+            {profile && <>
+            
             <Perfil profile={profile} />
             
             <ContainerForm>
@@ -86,6 +91,8 @@ export function Profile() {
                 }
 
             </ContainerConteudo>
+
+            </>}
 
         </ContainerMain>
     )

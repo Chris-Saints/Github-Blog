@@ -15,6 +15,7 @@ import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Header } from "../../components/Header"
+import { Loading } from "../../components/Loading"
 
 
 interface IssueData {
@@ -31,28 +32,33 @@ interface IssueData {
 export function Project () {
 
     const { issueNumber } = useParams() //Para pegar o numero da issue, definida na rota
-
+    const [loading, setLoading] = useState<boolean>(false)
     const [issue, setIssue] = useState<IssueData | null>(null) //Armazena todo o dado requisitado da api na issue
 
 
     useEffect(() => {
         async function fetchIssue() {
+            setLoading(true)
+
             const response = await axios.get(
                 `https://api.github.com/repos/Chris-Saints/Github-Blog/issues/${issueNumber}` //Aqui, você faz a requisição à API do GitHub e guarda o retorno no estado issue.
             )
             setIssue(response.data)
+
+            setLoading(false)
         }
 
         fetchIssue()
     }, [issueNumber])
 
-    if (!issue) {
-        return <p>Carregando post...</p>
-    }
 
     return(
         <ContainerMainProject>
             <Header />
+
+            {loading && <Loading />}
+
+            {issue && <>
             <ContainerTitulo>
                 <NavProjectContainer>
                     <NavLink to={"/"}><button><FontAwesomeIcon icon= {faAngleLeft} />VOLTAR</button></NavLink>
@@ -82,6 +88,8 @@ export function Project () {
                     {issue.body}
                 </ReactMarkdown>
             </ContentIssueContainer>
+
+            </>}
             
         </ContainerMainProject>
     )
