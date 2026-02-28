@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const token = null
+
 
 export const api = axios.create({
     baseURL: "https://api.github.com",
-    headers: token ? { Authorization: `Bearer ${token}`} : undefined,
+    headers: { Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`},
 });
 
 export async function fetchUser(username: string) {
@@ -13,13 +13,11 @@ export async function fetchUser(username: string) {
 }
 
 export async function fetchIssues(user: string, repo: string) {
-    const { data } = await api.get(`/repos/${user}/${repo}/issues`);
+    const { data } = await api.get(`/repos/${user}/${repo}/issues`); 
     return data;
 }
 
 export async function searchIssues(query: string, user: string, repo: string) {
-    const q = `${query} repo:${user}/${repo}`;
-    const { data } =  await api.get(`
-    /search/issues?q=${encodeURIComponent(q)}`);
-    return data
+    const { data } =  await api.get(`/search/issues?q=${query}+repo:${user}/${repo}+is:issue`);
+    return data.items
 }

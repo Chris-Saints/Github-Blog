@@ -4,29 +4,27 @@ import { faBuilding } from "@fortawesome/free-solid-svg-icons";
 import { faUserGroup } from "@fortawesome/free-solid-svg-icons/faUserGroup";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { ContainerPerfil, ContainerPerfilInfo, PerfilInfo, PerfilNameLink } from "./styles";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect} from "react";
+import type { GitHubUserProfile } from "../../utils/utils";
 
 
 
-interface ProfileData {
-    name: string
-    bio: string
-    login: string
-    company: string
-    followers: number
-    avatar_url: string
+
+
+interface PerfilProps {
+    profile: GitHubUserProfile
 }
 
 
-export function Perfil() {
+export function Perfil({profile}: PerfilProps) {
 
-    const [profile, setProfile] = useState<ProfileData | null>(null)
+    
+    
 
     useEffect(() => {
         async function fetchProfile() {
-            const response = await axios.get("https://api.github.com/users/Chris-Saints")
-            setProfile(response.data)
+            
+
         }
 
         fetchProfile()
@@ -35,9 +33,6 @@ export function Perfil() {
     if (!profile) {
         return <p>Carregando perfil...</p>
     }
-
-
-
 
     return (
         <ContainerPerfil>
@@ -66,7 +61,7 @@ export function Perfil() {
 
                     <span>
                         <FontAwesomeIcon icon={faUserGroup} style={{color: "#3A536B", height: '18px'}}/>
-                        {profile.followers} seguidores
+                        {profile.followers === 1 ? `${profile.followers} seguidor` : `${profile.followers} seguidores`}
                     </span>
                 </PerfilInfo>
             </ContainerPerfilInfo>

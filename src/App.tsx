@@ -6,7 +6,7 @@ import { Project } from './Pages/Project'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 
-const router =createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <Profile />

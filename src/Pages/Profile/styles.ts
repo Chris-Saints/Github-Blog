@@ -7,7 +7,7 @@ export const ContainerMain = styled.main`
     align-items: center;
 `
 
-export const ContainerForm = styled.form`
+export const ContainerForm = styled.div`
     margin-top: 200px;
     max-width: 54rem;
     width: 100%;
@@ -36,6 +36,7 @@ export const ContainerForm = styled.form`
         border: 1px solid ${props =>  props.theme['base-border']};
         padding: 1rem;
         border-radius: 8px;
+        color: ${props => props.theme['base-text']};
     }
 `
 

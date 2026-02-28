@@ -49,6 +49,8 @@ export const PerfilNameLink = styled.div`
         align-items: center;
         gap: 0.5rem;
         padding-bottom: 2px;
+        text-decoration: none;
+
 
         border-bottom: 2px solid transparent;
 

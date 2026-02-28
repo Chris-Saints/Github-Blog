@@ -1,12 +1,21 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { NavLink, useParams } from "react-router-dom"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import rehypeRaw from "rehype-raw"
 import rehypeSanitize from "rehype-sanitize"
 import { formatDistanceToNow } from "date-fns"
 import { ptBR } from "date-fns/locale/pt-BR"
+import { ContainerMainProject, ContainerTitulo, ContentIssueContainer, InfoIssueContainer, NavProjectContainer } from "./styles"
+import { faCalendarDay } from "@fortawesome/free-solid-svg-icons"
+import { faComment } from "@fortawesome/free-solid-svg-icons"
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Header } from "../../components/Header"
+
 
 interface IssueData {
     title: string
@@ -17,6 +26,7 @@ interface IssueData {
         login: string
     }
 }
+
 
 export function Project () {
 
@@ -41,23 +51,38 @@ export function Project () {
     }
 
     return(
-        <main>
-            <h1>{issue.title}</h1>
-            <p>
-                Por {issue.user.login} * {" "}
-                {formatDistanceToNow(new Date(issue.created_at),{
-                    addSuffix: true,
-                    locale: ptBR,
-                })}{" "}
-                * {issue.comments} comentários
-            </p>
+        <ContainerMainProject>
+            <Header />
+            <ContainerTitulo>
+                <NavProjectContainer>
+                    <NavLink to={"/"}><button><FontAwesomeIcon icon= {faAngleLeft} />VOLTAR</button></NavLink>
+                    <a href="https://github.com/Chris-Saints">VER NO GITHUB <FontAwesomeIcon icon={faArrowUpRightFromSquare} /></a>
+                </NavProjectContainer>
 
-            <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                rehypePlugins={[rehypeRaw, rehypeSanitize]}
-            >
-                {issue.body}
-            </ReactMarkdown>
-        </main>
+                <h1>{issue.title}</h1>
+ 
+                <InfoIssueContainer>   
+                    <div><FontAwesomeIcon icon={faGithub} /> {issue.user.login}</div> 
+                    
+                    <div><FontAwesomeIcon icon={faCalendarDay}/> {formatDistanceToNow(new Date(issue.created_at),{
+                        addSuffix: true,
+                        locale: ptBR,
+                    })}</div>
+
+                    <div><FontAwesomeIcon icon={faComment} /> <p>{issue.comments} comentários</p></div>
+                </InfoIssueContainer>
+              
+            </ContainerTitulo>
+
+            <ContentIssueContainer>
+                <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    rehypePlugins={[rehypeRaw, rehypeSanitize]}
+                >
+                    {issue.body}
+                </ReactMarkdown>
+            </ContentIssueContainer>
+            
+        </ContainerMainProject>
     )
 }

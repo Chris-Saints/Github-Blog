@@ -1,15 +1,31 @@
+import { formatDistanceToNow } from "date-fns";
+import type { GitHubIssue } from "../../utils/utils";
 import { ContainerConteudo, ContainerTitle } from "./styles";
+import { ptBR } from "date-fns/locale/pt-BR"
 
-export function Conteudo() {
+interface ContentProps {
+    issues: GitHubIssue
+}
+
+export function Content({issues}: ContentProps) {
+
+    if(!issues) {
+        return <div>Carregando...</div>
+    }
     return (
-        <ContainerConteudo>
+        <ContainerConteudo to={`/post/${issues.number}`}>
             <ContainerTitle>
-                <h2>JavaScript data types and data structures</h2>
+                <h2>{issues.title}</h2>
 
-                <span>Há 1 dia</span>
+                <span>
+                    {formatDistanceToNow(new Date(issues.created_at),{
+                        addSuffix: true,
+                        locale: ptBR,
+                    })}
+                </span>
             </ContainerTitle>
 
-            <p>Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in </p>
+            <p>{issues.body}</p>
         </ContainerConteudo>
     )
 }
