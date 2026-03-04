@@ -33,6 +33,7 @@ export const ContainerTitle = styled.div`
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    gap: 0.5rem;
 
     width: 100%;
     text-align: start;

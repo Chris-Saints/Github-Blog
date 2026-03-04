@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Content } from "../../components/Conteudo";
+import { Content } from "../../components/Content";
 import { Header } from "../../components/Header";
 import { Perfil } from "../../components/Perfil";
 import { ContainerConteudo, ContainerForm, ContainerMain } from "./styles";
