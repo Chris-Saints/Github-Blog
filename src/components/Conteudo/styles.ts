@@ -51,3 +51,11 @@ export const ContainerTitle = styled.div`
         font-size: 14px;
     }
 `
+
+export const ContentContainer = styled.div`
+    width: 300px;                /* Define o tamanho máximo (pode ser % ou px) */
+    white-space: wrap;         /* Impede que o texto quebre para a próxima linha */
+    overflow: hidden;            /* Esconde o texto que sai de fora da div */
+    text-overflow: ellipsis;     /* Adiciona "..." no final */
+
+`

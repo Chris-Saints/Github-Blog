@@ -83,6 +83,7 @@ export const ContentIssueContainer = styled.div`
     max-width: 54rem;
     width: 100%;
     display: flex;
+    flex-direction: column;
 
     justify-content: start;
     margin: 7rem;

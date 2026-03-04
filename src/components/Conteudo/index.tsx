@@ -1,7 +1,11 @@
 import { formatDistanceToNow } from "date-fns";
 import type { GitHubIssue } from "../../utils/utils";
-import { ContainerConteudo, ContainerTitle } from "./styles";
+import { ContainerConteudo, ContainerTitle, ContentContainer } from "./styles";
 import { ptBR } from "date-fns/locale/pt-BR"
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeSanitize from "rehype-sanitize";
+import rehypeRaw from "rehype-raw";
 
 interface ContentProps {
     issues: GitHubIssue
@@ -25,7 +29,16 @@ export function Content({issues}: ContentProps) {
                 </span>
             </ContainerTitle>
 
-            <p>{issues.body}</p>
+            <ContentContainer>
+                <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    rehypePlugins={[rehypeRaw, rehypeSanitize]}
+                >
+                    {issues.body}
+                </ReactMarkdown>
+            </ContentContainer>
+
+            
         </ContainerConteudo>
     )
 }
